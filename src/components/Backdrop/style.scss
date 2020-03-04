@@ -1,0 +1,147 @@
+.Backdrop {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .sign-post {
+    @media (max-width: 900px) {
+      display: none;
+    }
+    @media (max-width: 1100px) {
+      left: 55px;
+    }
+
+    position: absolute;
+    bottom: 0;
+    left: 100px;
+    
+    font-weight: 600;
+    font-size: 21px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+
+    box-sizing: border-box;
+    padding-bottom: 160px;
+
+    .post {
+      width: 14px;
+      height: 100%;
+      background-color: #222B5C;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .top-sign {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-top: 20px;
+      padding-bottom: 20px;
+
+      img {
+        width: 176px;
+      }
+
+      .text {
+        position: absolute;
+        left: -3px;
+        color: white;
+        transform: rotate(-1.33deg);
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .sign {
+      font: inherit;
+      background-color: #FBF4EA;
+      border: none;
+      display: block;
+      text-transform: inherit;
+      width: 160px;
+      line-height: 41px;
+      color: inherit;
+      margin: 35px auto 0 auto;
+      border-radius: 2px;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+      letter-spacing: inherit;
+      transition: background-color .3s;
+      &.selected {
+        background-color: #E28B79;
+      }
+    }
+  }
+
+  .content-container {
+    --top: 80px;
+    position: absolute;
+    top: var(--top);
+
+    // the bottom scenery svg normally has a height of 38px, but if the window width
+    // exceeds the scenery width (1688px), then it expands maintaining aspect ratio
+    // the following keeps the content-container flush with the road
+    bottom: calc(100vw * (38 / 1688)); // hardcoded ratio (road height : scenery width)
+    max-height: calc(100vh - var(--top) - 38px);
+    @media (max-width: 600px) {
+      bottom: 0;
+      max-height: none;
+    }
+
+    @media (min-width: 2000px) {
+      --top: 160px;
+    }
+
+    left: 400px;
+    right: 100px;
+    @media (max-width: 1100px) {
+      left: 275px;
+      right: 50px;
+    }
+    @media (max-width: 900px) {
+      left: 30px;
+      right: 30px;
+    }
+    @media (max-width: 480px) {
+      left: 15px;
+      right: 15px;
+    }
+  }
+
+  .scenery {
+    position: absolute;
+    bottom: 0;
+    min-width: 100%;
+    pointer-events: none; // allows clicks, scrolls, etc. to pass through
+    left: 50%;
+    transform: translateX(-50%);
+
+    // prevent scenery from covering signpost
+    @media (max-width: 1250px) {
+      transform: translateX(-43%);
+    }
+
+    &.mobile {
+      display: none;
+      bottom: -40px;
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 600px) {
+      display: none;
+      &.mobile {
+        display: initial;
+      }
+    }
+  }
+}
